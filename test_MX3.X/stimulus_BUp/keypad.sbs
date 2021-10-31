@@ -1,0 +1,178 @@
+## SCL Builder Setup File: Do not edit!!
+
+## VERSION: MPLAB X
+## FORMAT:  v2.00.01
+## DEVICE:  PIC32MX370F512L
+
+## PINREGACTIONS
+cyc
+No Repeat
+RG7
+RG8
+RG9
+RC3
+--
+0
+1
+1
+1
+1
+--
+&
+## ADVPINREGACTIONS
+RG9
+RG8
+RG7
+RC3
+--
+1
+COND1
+Cont
+1
+cyc
+0
+1
+1
+1
+--
+1
+COND2
+Cont
+1
+cyc
+1
+1
+1
+1
+--
+1
+COND1
+Cont
+1
+cyc
+1
+0
+1
+1
+--
+1
+COND2
+Cont
+1
+cyc
+1
+1
+1
+1
+--
+1
+COND1
+Cont
+1
+cyc
+1
+1
+0
+1
+--
+1
+COND2
+Cont
+1
+cyc
+1
+1
+1
+1
+--
+1
+COND1
+Cont
+1
+cyc
+1
+1
+1
+0
+--
+1
+COND2
+Cont
+1
+cyc
+1
+1
+1
+1
+--
+&
+--
+COND1
+Bit
+LATC.LATC2
+=
+0
+0
+cyc
+COL4
+--
+COND2
+Bit
+LATC.LATC2
+=
+1
+0
+cyc
+COL4
+--
+&
+## CLOCK
+&
+## STIMULUSFILE
+
+AD1CSSL
+Demand
+0
+2
+
+Hex
+Yes
+
+--
+&
+## RESPONSEFILE
+&
+## ASYNCH
+Pin
+RG9
+Pulse Low
+10000 cyc
+Row1
+-1
+--
+Pin
+RG8
+Pulse Low
+10000 cyc
+Row2
+-1
+--
+Pin
+RG7
+Pulse Low
+10000 cyc
+Row3
+-1
+--
+Pin
+RC3
+Pulse Low
+10000 cyc
+Row4
+-1
+--
+&
+## ADVANCEDSCL
+
+1
+&

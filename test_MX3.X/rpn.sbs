@@ -1,0 +1,197 @@
+## SCL Builder Setup File: Do not edit!!
+
+## VERSION: MPLAB X
+## FORMAT:  v2.00.01
+## DEVICE:  PIC32MX370F512L
+
+## PINREGACTIONS
+cyc
+No Repeat
+RG7
+RG8
+RG9
+RC3
+RF3
+RF4
+RF5
+RF0
+RD14
+RD15
+RD8
+RD9
+RB1
+RB11
+RB8
+RB0
+--
+0
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+--
+&
+## ADVPINREGACTIONS
+RG9
+RG8
+RG7
+RC3
+--
+&
+--
+COND1
+Any
+
+
+
+0
+cyc
+
+--
+&
+## CLOCK
+&
+## STIMULUSFILE
+
+AD1CSSL
+Demand
+0
+2
+
+Hex
+Yes
+
+--
+&
+## RESPONSEFILE
+&
+## ASYNCH
+Pin
+RG9
+Pulse Low
+10000 cyc
+1
+-1
+--
+Pin
+RG8
+Pulse Low
+10000 cyc
+2
+-1
+--
+Pin
+RG7
+Pulse Low
+10000 cyc
+3
+-1
+--
+Pin
+RC3
+Pulse Low
+10000 cyc
+4
+-1
+--
+Pin
+RF3
+Pulse Low
+10000 cyc
+5
+-1
+--
+Pin
+RF5
+Pulse Low
+10000 cyc
+6
+-1
+--
+Pin
+RF4
+Pulse Low
+10000 cyc
+7
+-1
+--
+Pin
+RD15
+Pulse Low
+10000 cyc
+8
+-1
+--
+Pin
+RD14
+Pulse Low
+10000 cyc
+9
+-1
+--
+Pin
+RB11
+Pulse Low
+10000 cyc
+0
+-1
+--
+Pin
+RB1
+Pulse Low
+10000 cyc
+.
+-1
+--
+Pin
+RB0
+Pulse Low
+10000 cyc
+=
+-1
+--
+Pin
+RF0
+Pulse Low
+10000 cyc
++
+-1
+--
+Pin
+RB8
+Pulse Low
+10000 cyc
+-
+-1
+--
+Pin
+RD8
+Pulse Low
+10000 cyc
+*
+-1
+--
+Pin
+RD9
+Pulse Low
+10000 cyc
+/
+-1
+--
+&
+## ADVANCEDSCL
+
+1
+&
