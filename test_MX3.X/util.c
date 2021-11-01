@@ -29,7 +29,7 @@
  * 
  * 		
  *******************************************************************************/
-#define     SKIP        50000    // Sets the heartbeat frequency
+#define     SKIP        20000    // Sets the heartbeat frequency
 
 //#define     DUTY        50     // 0.1 % duty cycle
 #define     DUTY      500     // 1 % duty cycle
