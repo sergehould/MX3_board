@@ -22,7 +22,7 @@
 
 int main( void){
     setbuf(stdout, NULL); 
-    UART_InitPoll(460800);
+	uart4_init();
     set_stdio(C_UART4);
     printf("Hello world\n");
     
