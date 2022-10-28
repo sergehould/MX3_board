@@ -34,13 +34,14 @@
 #include <sys/attribs.h>
 #include <string.h>
 
+
 #ifdef RTOS
 /* Kernel includes. */
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h" 
-#include "semphr.h"
-#include "croutine.h"
+#include "../../Source/include/FreeRTOS.h"
+#include "../../Source/include/task.h"
+#include "../../Source/include/queue.h" 
+#include "../../Source/include/semphr.h"
+#include "../../Source/include/croutine.h"
 #endif
 
 
@@ -1298,6 +1299,12 @@ void UART_InitPoll(unsigned int baud)
 {
     UART_ConfigurePins();
     UART_ConfigureUart(baud);
+}
+
+void uart4_init(void)
+{
+    UART_ConfigurePins();
+    UART_ConfigureUart(800000);
 }
 
 /***	UART_ConfigureUart

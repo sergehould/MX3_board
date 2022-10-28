@@ -65,6 +65,8 @@ extern "C" {
 #define 	uart2_wInt_init		initUart2_wInt
 #define     lcd_init            initLCD	
 
+
+
 enum my_fp {
  C_UART1,
  C_UART2,
@@ -302,6 +304,7 @@ void UART2_Write(uint8_t txData);
 void UART_InitPoll(unsigned int baud);
 void UART_Init(unsigned int baud);
 void UART_PutString(char szData[]);
+void uart4_init(void);
 
 // private functions
 void UART_ConfigurePins();
