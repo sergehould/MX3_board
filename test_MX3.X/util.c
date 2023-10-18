@@ -4,13 +4,16 @@
  
 	Description: 
       
- * * REVISION HISTORY: 
+ * * REVISION HISTORY:
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Author        	Date            Comments on this revision
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Serge Hould      29 Sept. 2021	v1.0
+ * Serge Hould      13 Dec 2021     v1.1 Adapt for MICROSTICK II
+ * Serge Hould      11 April 2022   v1.2 Modify heartbeat macros
+ * SH               28 June 2023    v1.3 Add  map function 
  * 
- * 
+ * TO DO: fine tune delay for MICROSTICK II 
  * 		
  *******************************************************************************/
 #include <xc.h>
@@ -26,22 +29,33 @@
  * Author        	Date            Version     Comments on this revision
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Serge Hould      15 Sept. 2021   1.0         First version 
+ * Serge Hould      11 April 2022   1.1         Sets different values depending
+ *                                              on the board.
  * 
  * 		
  *******************************************************************************/
-#define     SKIP        20000    // Sets the heartbeat frequency
 
-//#define     DUTY        50     // 0.1 % duty cycle
-#define     DUTY      500     // 1 % duty cycle
-//#define     DUTY      5000     // 10 % duty cycle
-//#define     DUTY       50000   // 100% duty cycle
+
 
 #if defined  MX3
+	#define     SKIP        20000    // Sets the heartbeat frequency
+
+	//#define     DUTY        20     // 0.1 % duty cycle
+	#define     DUTY      200     // 1 % duty cycle
+	//#define     DUTY      2000     // 10 % duty cycle
+	//#define     DUTY       20000   // 100% duty cycle
     //#define     HEARTBEAT    LATDbits.LATD12  //Green LED
     #define     HEARTBEAT    LATDbits.LATD3  // Blue LED
     //#define     HEARTBEAT    LATDbits.LATD2  // Red LED
 #elif   defined EXPLORER_16_32
+	#define     SKIP        20000    // Sets the heartbeat frequency
+	#define     DUTY      	10000     // 50 % duty cycle
     #define     HEARTBEAT    LATAbits.LATA7  // D10 LED
+
+#elif defined MICROSTICK_II
+	#define     SKIP        20000    // Sets the heartbeat frequency
+	#define     DUTY      	10000     // 50 % duty cycle
+    #define     HEARTBEAT      LATAbits.LATA0
 #endif
 
 
@@ -53,7 +67,7 @@ void heartbeat(void){
     }
     else if (cnt == DUTY )HEARTBEAT = 0;
 }
-
+ 
 #if defined  MX3
 void init_heartbeat(void){
         // Configure RGBLEDs as digital outputs.
@@ -83,6 +97,11 @@ void init_heartbeat(void){
 #elif   defined EXPLORER_16_32
 void init_heartbeat(void){
       TRISAbits.TRISA7 = 0;       //LED D10
+}
+
+#elif defined MICROSTICK_II
+void init_heartbeat(void){
+      TRISAbits.TRISA0  = 0;       //LED D6
 }
 #endif
 
@@ -155,7 +174,7 @@ void init_tone(void){
 #endif
 /************************ End of Tone section*********************************/
 
-
+#if (defined  MX3) || (defined EXPLORER_16_32)
 /*********************** Blocking Delay section *******************************
 **    void delay_10us( unsigned int  t10usDelay )
 **
@@ -244,5 +263,99 @@ void delay_ms( unsigned int  tmsDelay )
     }   // end while
 }
 
+#elif defined MICROSTICK_II
+/*********************** Blocking Delay section *******************************
+**    void delay_10us( unsigned int  t10usDelay )
+**
+**	Synopsis:
+**		delay_10us(100)  // 100*10uS = 1mS
+**
+**	Parameters:
+**		t10usDelay - the amount of time you wish to delay in tens of microseconds
+**
+**	Return Values:
+**      none
+**
+**	Errors:
+**		none
+**
+**	Description:
+**		This procedure delays program execution for the specified number
+**      of microseconds. This delay is not precise.
+**		
+**	Note:
+**		This routine is written with the assumption that the
+**		system clock is 80 MHz.
+*/
+void delay_10us( unsigned int  t10usDelay )
+{
+    int j;
+    while ( 0 < t10usDelay )
+    {
+        t10usDelay--;
+        j = 14;
+        while ( 0 < j )
+        {
+            j--;
+        }   // end while 
+        asm volatile("nop"); // do nothing
+        asm volatile("nop"); // do nothing
+        asm volatile("nop"); // do nothing
+        asm volatile("nop"); // do nothing
+        asm volatile("nop"); // do nothing
+         
+    }   // end while
+}
 
+
+/******************************************************************************
+**    void delay_ms( unsigned int  tmsDelay )
+**
+**	Synopsis:
+**		delay_ms(100)  // 100*1mS = 100mS
+**
+**	Parameters:
+**		tmsDelay - the amount of time you wish to delay in milliseconds
+**
+**	Return Values:
+**      none
+**
+**	Errors:
+**		none
+**
+**	Description:
+**		This procedure delays program execution for the specified number
+**      of milliseconds. This delay is not precise.
+**		
+**	Note:
+**		This routine is written with the assumption that the
+**		system clock is 80 MHz.
+*/
+void delay_ms( unsigned int  tmsDelay )
+{
+    int j;
+    tmsDelay *=100;
+    while ( 0 < tmsDelay )
+    {
+        tmsDelay--;
+        j = 14;
+        while ( 0 < j )
+        {
+            j--;
+        }   // end while 
+        asm volatile("nop"); // do nothing
+        asm volatile("nop"); // do nothing
+        asm volatile("nop"); // do nothing
+        asm volatile("nop"); // do nothing
+        asm volatile("nop"); // do nothing
+         
+    }   // end while
+}
+
+#endif
 /********************* End of Blocking Delay section  section******************/
+
+/* Map function */
+long map(long x, long in_min, long in_max, long out_min, long out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
