@@ -16,8 +16,8 @@ extern "C" {
 #endif
     
 /******	FUNCTION PROTOYPES ******/
-void init_keyb(void);
-int get_key(void);
+void keyb_init(void);
+int key_get(void);
 
 #ifdef	__cplusplus
 }
