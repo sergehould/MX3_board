@@ -31,7 +31,7 @@
 
 
 /* Init keyboard to use stimulus */
-void init_keyb(void){
+void keyb_init(void){
     TRISCbits.TRISC3 = 1;// key 4
     ANSELGbits.ANSG7 = 0;    // set pin as digital
     TRISGbits.TRISG7 = 1;  // key 3
@@ -64,7 +64,7 @@ void init_keyb(void){
 
 /* Non-blocking version  */
 /* Useful for lab8-part1 simulation mode */
-int get_key(void){
+int key_get(void){
    unsigned char conv_table[] = { 
             '1',    '2',    '3',	'+',
             '4',    '5',	'6',	'-',
